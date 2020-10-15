@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="testStudent" class="ioc.spring.dependecyLookUp.Student">
+        <property name="id" value="1"/>
+        <property name="namel" value="aaa"/>
+    </bean>
+
+    <!-- primary主要的，多个一样类型的返回这个 -->
+    <bean id="supperStudent" class="ioc.spring.dependecyLookUp.SupperStudent" parent="testStudent" primary="true">
+        <property name="address" value="合肥"/>
+    </bean>
+
+    <!-- 或者注入 ObjectProvider
+    ObjectFactoryCreatingFactoryBean 与ObjectFactory 没有父子关系，不过 ObjectFactoryCreatingFactoryBean 属于 FactoryBean 来创建 ObjectFactory，
+    当依赖查找或依赖注入时，将返回 ObjectFactory 实例
+    -->
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="testStudent"/>
+    </bean>
+</beans>
