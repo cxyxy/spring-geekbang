@@ -4,6 +4,7 @@ import ioc.spring.dependecyLookUp.Student;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 /**
  * 依赖注入
@@ -17,7 +18,7 @@ public class DenpendecyInjectMain {
 
         /**
          * DefaultListableBeanFactory
-         * 依赖注入的beanfactory
+         * 依赖注入的beanfactory，（内建依赖）
          */
         System.out.println(studentRepository.getBeanFactory());
         System.out.println(studentRepository.getBeanFactory()==beanFactory);
@@ -38,5 +39,8 @@ public class DenpendecyInjectMain {
         ApplicationContext app = studentRepository.getObjectFactoryApplication().getObject();
         System.out.println(beanFactory==app);
 
+        //容器内建bean,
+        Environment bean = beanFactory.getBean(Environment.class);
+        System.out.println("获取Environment类型的bean"+bean);
     }
 }
